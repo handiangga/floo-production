@@ -76,6 +76,12 @@ test('mapRows uses the source colors for shipment status and calculated deadline
   assert.equal(shippedRow.shipped, true);
 });
 
+test('mapRows recognizes the mauve purple used by the Shopee sheet as shipped', () => {
+  const mauve = formattedValue => ({ formattedValue, effectiveFormat: { backgroundColor: { red: 0.82, green: 0.63, blue: 0.72 } } });
+  const row = { values: [mauve('5153'), mauve('260929BHDKCEF3'), mauve('29 September'), mauve('nadeaaa13'), mauve('Rahayu'), mauve('Sage'), mauve('S'), mauve('1')] };
+  assert.equal(mapRows([row], 'Shopee', 2026)[0].shipped, true);
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
