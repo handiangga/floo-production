@@ -1,0 +1,2 @@
+import OrdersTable from '../components/orders/OrdersTable';
+export default function MonitoringPage({ query, onQuery, items, today, onDetail }) { return <section className="panel monitoring-page"><input placeholder="Cari username, nomor, ID, model, warna..." className="no-print monitor-search" value={query} onChange={e => onQuery(e.target.value)} /><OrdersTable items={items} today={today} onDetail={onDetail} /></section>; }

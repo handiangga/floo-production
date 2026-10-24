@@ -1,0 +1,3 @@
+import {useEffect,useState} from 'react';
+import {getOrders} from '../services/orderService';
+export function useOrders(user,month){const[items,setItems]=useState([]),[warnings,setWarnings]=useState([]),[updated,setUpdated]=useState(null),[error,setError]=useState('');useEffect(()=>{if(!user)return;let active=true;const load=async()=>{try{const data=await getOrders(month);if(active){setItems(data.items||[]);setWarnings(data.warnings||[]);setUpdated(data.updatedAt);setError('')}}catch(e){if(active)setError(e.message)}};load();const timer=setInterval(load,60000);return()=>{active=false;clearInterval(timer)}},[user,month]);return {items,warnings,updated,error};}

@@ -1,0 +1,1 @@
+export async function api(url,opts={}){const response=await fetch(url,{credentials:'include',...opts});const data=await response.json().catch(()=>({}));if(!response.ok)throw Error(data.error||`HTTP ${response.status}`);return data;}

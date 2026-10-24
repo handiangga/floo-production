@@ -1,0 +1,2 @@
+import { ShieldAlert } from 'lucide-react';
+export default function Alerts({ error, warnings }) { return <>{error && <div className="no-print bg-red-50 text-red-700 rounded-xl p-4 mb-4"><ShieldAlert className="inline mr-2" size={18} />{error}. Data terakhir tetap ditampilkan.</div>}{warnings.length > 0 && <div className="no-print bg-amber-50 text-amber-800 rounded-xl p-3 mb-4 text-sm">{warnings.join(' | ')}</div>}</>; }

@@ -1,0 +1,11 @@
+import { Router } from 'express';
+import { login,logout,me,publicConfig } from '../controllers/authController.js';
+import { auth } from '../middleware/auth.js';
+import { requireGoogleCredential } from '../middleware/validate.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+const router=Router();
+router.post('/auth/google',requireGoogleCredential,asyncHandler(login));
+router.post('/logout',logout);
+router.get('/me',auth,me);
+router.get('/public-config',publicConfig);
+export default router;
