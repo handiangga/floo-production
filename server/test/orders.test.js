@@ -82,6 +82,28 @@ test('mapRows recognizes the mauve purple used by the Shopee sheet as shipped', 
   assert.equal(mapRows([row], 'Shopee', 2026)[0].shipped, true);
 });
 
+test('mapRows recognizes vivid orange and carries express status to product lines', () => {
+  const orange = formattedValue => ({ formattedValue, effectiveFormat: { backgroundColor: { red: 1, green: 0.43, blue: 0 } } });
+  const blank = formattedValue => ({ formattedValue });
+  const order = { values: [orange('5651'), orange('261018G4046WH'), orange('18 Oktober'), orange('rahmhum'), blank(''), blank(''), blank(''), blank('1')] };
+  const product = { values: [blank(''), blank(''), blank(''), blank(''), orange('Kemaja batik'), orange('Haris'), orange('XXL'), orange('1')] };
+  const rows = mapRows([order, product], 'Shopee', 2026);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].express, true);
+  assert.equal(rows[0].due, '2026-10-25');
+});
+
+test('mapRows reads express shade from a merged parent cell', () => {
+  const orange = formattedValue => ({ formattedValue, effectiveFormat: { backgroundColor: { red: 1, green: 0.43, blue: 0 } } });
+  const blank = formattedValue => ({ formattedValue });
+  const parent = { values: [orange('5700'), blank('261021J1EECHV'), blank('21 Oktober'), blank('putri_hidyah'), blank(''), blank(''), blank(''), blank('')] };
+  const product = { values: [blank(''), blank(''), blank(''), blank(''), blank('Anjani'), blank('Denim layer putih'), blank('MK'), blank('1')] };
+  const mergedRows = [{ startRowIndex: 0, endRowIndex: 2, startColumnIndex: 0, endColumnIndex: 1 }];
+  const rows = mapRows([parent, product], 'Shopee', 2026, mergedRows);
+  assert.equal(rows[0].express, true);
+  assert.equal(rows[0].due, '2026-10-28');
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
