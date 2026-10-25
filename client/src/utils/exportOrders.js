@@ -3,8 +3,8 @@ import { formatDate } from './dates';
 const columns = [
   ['No', item => item.rowNumber || ''], ['Channel', item => item.channel], ['Tanggal Pesan', item => formatDate(item.date)],
   ['No. Pesanan / Resi', item => item.id || item.number || ''], ['Username', item => item.username || ''], ['Model', item => item.model || ''],
-  ['Warna', item => item.warna || ''], ['Size', item => item.size || ''], ['QTY', item => item.qty], ['Jatuh Tempo', item => formatDate(item.due)],
-  ['Tahap Terakhir', item => item.stage || ''], ['Status Resi', item => item.shipped ? 'Sudah Dikirim' : item.finished ? 'Siap Kirim' : 'Belum Dikirim'],
+  ['Kategori', item => item.category || 'Atasan'], ['Warna', item => item.warna || ''], ['Size', item => item.size || ''], ['QTY', item => item.qty], ['Jatuh Tempo', item => formatDate(item.due)],
+  ['Tahap Terakhir', item => item.stage || ''], ['Status Resi', item => item.cancelled ? 'Dibatalkan' : item.emptyPackage ? 'Paket Kosong' : item.shipped ? 'Sudah Dikirim' : item.finished ? 'Siap Kirim' : 'Belum Dikirim'],
   ['Jenis Pesanan', item => item.express ? 'Express' : 'Reguler']
 ];
 

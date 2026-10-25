@@ -8,6 +8,7 @@ export default function MonitoringPage({ query, onQuery, items, today, onDetail,
   const [pageSize, setPageSize] = useState(50);
   const [status, setStatus] = useState('all');
   const [division, setDivision] = useState('all');
+  const [category, setCategory] = useState('all');
   const [dueRange, setDueRange] = useState('all');
   const [dueFrom, setDueFrom] = useState('');
   const [dueTo, setDueTo] = useState('');
@@ -15,11 +16,11 @@ export default function MonitoringPage({ query, onQuery, items, today, onDetail,
   const divisions = useMemo(() => [...new Set(items.map(item => item.division).filter(Boolean))], [items]);
   const filteredItems = useMemo(() => items.filter(item => {
     const days = item.due ? Math.round((Date.parse(`${item.due}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86400000) : null;
-    const statusMatch = status === 'all' || (status === 'unshipped' && !item.shipped) || (status === 'shipped' && item.shipped) || (status === 'ready' && !item.shipped && item.finished) || (status === 'overdue' && !item.shipped && days !== null && days < 0);
+    const statusMatch = status === 'all' || (status === 'unshipped' && !item.shipped && !item.cancelled && !item.emptyPackage) || (status === 'shipped' && item.shipped) || (status === 'cancelled' && item.cancelled) || (status === 'empty-package' && item.emptyPackage) || (status === 'overdue' && !item.shipped && !item.cancelled && !item.emptyPackage && days !== null && days < 0);
     const dueMatch = dueRange === 'all' || (dueRange === 'today' && days === 0) || (dueRange === 'next3' && days !== null && days >= 0 && days <= 3) || (dueRange === 'overdue' && days !== null && days < 0);
     const customDateMatch = (!dueFrom || (item.due && item.due >= dueFrom)) && (!dueTo || (item.due && item.due <= dueTo));
-    return statusMatch && dueMatch && customDateMatch && (division === 'all' || item.division === division) && (!expressOnly || item.express);
-  }), [items, today, status, division, dueRange, dueFrom, dueTo, expressOnly]);
+    return statusMatch && dueMatch && customDateMatch && (division === 'all' || item.division === division) && (category === 'all' || item.category === category) && (!expressOnly || item.express);
+  }), [items, today, status, division, category, dueRange, dueFrom, dueTo, expressOnly]);
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / pageSize));
   const currentPage = Math.min(page, totalPages);
   const start = (currentPage - 1) * pageSize;
@@ -27,13 +28,14 @@ export default function MonitoringPage({ query, onQuery, items, today, onDetail,
 
   useEffect(() => setPage(1), [query, pageSize, filteredItems.length]);
   useEffect(() => { if (presetStatus !== 'all') { setStatus(presetStatus); onPresetUsed?.(); } }, [presetStatus, onPresetUsed]);
-  const resetFilters = () => { setStatus('all'); setDivision('all'); setDueRange('all'); setDueFrom(''); setDueTo(''); setExpressOnly(false); onQuery(''); };
+  const resetFilters = () => { setStatus('all'); setDivision('all'); setCategory('all'); setDueRange('all'); setDueFrom(''); setDueTo(''); setExpressOnly(false); onQuery(''); };
 
   return <section className="panel monitoring-page">
     <input placeholder="Cari username, nomor, ID, model, warna..." className="no-print monitor-search" value={query} onChange={e => onQuery(e.target.value)} />
     <div className="advanced-filters no-print">
-      <label>Status<select value={status} onChange={e => setStatus(e.target.value)}><option value="all">Semua status</option><option value="unshipped">Belum dikirim</option><option value="ready">Siap kirim</option><option value="shipped">Sudah dikirim</option><option value="overdue">Lewat deadline</option></select></label>
+      <label>Status<select value={status} onChange={e => setStatus(e.target.value)}><option value="all">Semua status</option><option value="unshipped">Belum dikirim</option><option value="shipped">Sudah dikirim</option><option value="cancelled">Dibatalkan</option><option value="empty-package">Paket kosong</option><option value="overdue">Lewat deadline</option></select></label>
       <label>Divisi<select value={division} onChange={e => setDivision(e.target.value)}><option value="all">Semua divisi</option>{divisions.map(value => <option key={value} value={value}>{value}</option>)}</select></label>
+      <label>Kategori<select value={category} onChange={e => setCategory(e.target.value)}><option value="all">Semua kategori</option><option value="Atasan">Atasan</option><option value="Jilbab & Slendang">Jilbab & Slendang</option><option value="Rok">Rok</option><option value="Kemeja">Kemeja</option></select></label>
       <label>Deadline<select value={dueRange} onChange={e => setDueRange(e.target.value)}><option value="all">Semua tanggal</option><option value="today">Hari ini</option><option value="next3">H+1 sampai H+3</option><option value="overdue">Sudah lewat</option></select></label>
       <label>Dari deadline<input type="date" value={dueFrom} onChange={e => setDueFrom(e.target.value)} /></label><label>Sampai deadline<input type="date" value={dueTo} onChange={e => setDueTo(e.target.value)} /></label>
       <label className="express-filter"><input type="checkbox" checked={expressOnly} onChange={e => setExpressOnly(e.target.checked)} /> Express 7 hari</label>
