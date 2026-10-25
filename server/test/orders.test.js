@@ -104,6 +104,16 @@ test('mapRows reads express shade from a merged parent cell', () => {
   assert.equal(rows[0].due, '2026-10-28');
 });
 
+test('mapRows detects cancelled and empty-package statuses from row colors and request text', () => {
+  const colored = (formattedValue, backgroundColor) => ({ formattedValue, effectiveFormat: { backgroundColor } });
+  const plain = formattedValue => ({ formattedValue });
+  const cancelled = { values: [colored('5191', { red: 0.75, green: 0, blue: 0 }), plain('261001G923GPS1'), plain('1 Oktober'), plain('user'), plain('Puspa'), plain('Coffe'), plain('M'), plain('1')] };
+  const emptyPackage = { values: [colored('5203', { red: 0, green: 1, blue: 0 }), plain('261002HMFOH2PF'), plain('2 Oktober'), plain('user'), plain('Cempaka'), plain('Sage'), plain('XXL'), plain('1'), plain('PAKET KOSONG, BELUM BALES')] };
+  const rows = mapRows([cancelled, emptyPackage], 'Shopee', 2026);
+  assert.equal(rows[0].cancelled, true);
+  assert.equal(rows[1].emptyPackage, true);
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
