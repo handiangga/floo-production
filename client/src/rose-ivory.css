@@ -89,6 +89,9 @@
   .report-page .orders-table tbody tr.row-express>td:last-child{background:#fff0d6!important}
   .orders-table tbody tr.row-express>td:first-child{box-shadow:inset 4px 0 #c58b32}
   .orders-table tbody tr.row-express .priority-tag.express{background:#f9dca7;color:#875012}
+  .clickable-order-row{cursor:pointer}
+  .clickable-order-row:focus-visible{outline:2px solid var(--rose);outline-offset:-2px}
+  .clickable-order-row:focus-visible>td{background:#f5e9ed!important}
   @media(prefers-reduced-motion:reduce){button{transition:none}.stat-card:hover{transform:none}}
 }
 
