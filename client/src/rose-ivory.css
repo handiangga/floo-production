@@ -71,6 +71,23 @@
   .monitor-pagination{padding-top:18px;flex-wrap:wrap}
   .report-page>div.mb-6{margin-top:20px}.report-page h4{padding-bottom:8px}
   @media(max-width:800px){.monitoring-page .orders-table-wrap,.report-page .orders-table-wrap{max-height:60vh}.monitoring-page .orders-table td:last-child,.report-page .orders-table td:last-child{position:static}.monitoring-page .orders-table th:last-child,.report-page .orders-table th:last-child{right:auto}}
+  .workload-panel{padding:20px;gap:18px}
+  .workload-panel>strong{align-self:center;background:#f5e9ed;border:1px solid #ead5dd;border-radius:10px;padding:8px 14px;min-width:150px}
+  .workload-panel>strong b{font-size:25px;line-height:1.2;font-variant-numeric:tabular-nums}
+  .workload-panel>strong small{margin-top:4px;color:#886672;font-size:11px}
+  .workload-list{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+  .workload-list>span{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:14px;min-width:0;min-height:108px;padding:15px 14px;background:#fcfaf8;border:1px solid var(--line);border-top:3px solid #d6adbc;border-radius:11px}
+  .workload-list>span>b{font-size:12px;font-weight:600;line-height:1.5;color:#725c67;white-space:nowrap}
+  .workload-list>span>em{font-size:26px;line-height:1.15;font-weight:700;font-style:normal;font-variant-numeric:tabular-nums;letter-spacing:-.5px;color:var(--burgundy);white-space:nowrap}
+  .workload-list>span>em small{font-size:12px;font-weight:500;color:#9a8790;letter-spacing:0}
+  @media(max-width:1450px){.workload-list{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  @media(max-width:800px){.workload-panel{padding:16px;grid-template-columns:1fr auto;gap:14px}.workload-panel>strong{min-width:0;padding:8px 10px}.workload-panel>strong small{font-size:9px}.workload-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.workload-list>span{min-width:0;min-height:95px;padding:13px}.workload-list>span>em{font-size:24px}.workload-panel h3{font-size:15px}.workload-panel p{font-size:11px}}
+  @media(max-width:420px){.workload-panel{grid-template-columns:1fr}.workload-panel>strong{justify-self:start;display:flex;align-items:center;gap:10px}.workload-panel>strong small{margin:0;font-size:11px}}
+  .orders-table tbody tr.row-express:hover>td,
+  .monitoring-page .orders-table tbody tr.row-express:hover>td:last-child,
+  .report-page .orders-table tbody tr.row-express:hover>td:last-child{background:#fff0d6!important}
+  .orders-table tbody tr.row-express:hover>td:first-child{box-shadow:inset 4px 0 #c58b32}
+  .orders-table tbody tr.row-express:hover .priority-tag.express{background:#f9dca7;color:#875012}
   @media(prefers-reduced-motion:reduce){button{transition:none}.stat-card:hover{transform:none}}
 }
 
