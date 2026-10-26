@@ -89,6 +89,8 @@
   .report-page .orders-table tbody tr.row-express>td:last-child{background:#fff0d6!important}
   .orders-table tbody tr.row-express>td:first-child{box-shadow:inset 4px 0 #c58b32}
   .orders-table tbody tr.row-express .priority-tag.express{background:#f9dca7;color:#875012}
+  .order-detail{max-height:calc(100dvh - 40px);overflow-y:auto}
+  .order-detail h3,.order-detail dd{overflow-wrap:anywhere}
   .clickable-order-row{cursor:pointer}
   .clickable-order-row:focus-visible{outline:2px solid var(--rose);outline-offset:-2px}
   .clickable-order-row:focus-visible>td{background:#f5e9ed!important}
