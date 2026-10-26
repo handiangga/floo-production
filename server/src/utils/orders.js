@@ -10,7 +10,13 @@ function color(c){
  // dominant colour instead of accepting just one exact shade (for example #ff0000,
  // #cc0000 and soft red are all cancellations).
  if((r>230&&g>175&&g<245&&b<225&&r>g&&g>b)||(r>220&&g>=55&&g<180&&b<100&&r>g+25))return 'orange';
- if(r>=100&&r>g*1.35&&r>b*1.35)return 'red';
+ // Brown is a regular-order colour in the WhatsApp sheet.  It has a red component
+ // too, so cancellation must be limited to the actual red hue (not merely a
+ // red-dominant dark colour such as brown).
+ const maximum=Math.max(r,g,b),minimum=Math.min(r,g,b);
+ const hue=maximum===minimum?0:maximum===r?60*((g-b)/(maximum-minimum)%6):maximum===g?60*((b-r)/(maximum-minimum)+2):60*((r-g)/(maximum-minimum)+4);
+ const normalizedHue=(hue+360)%360;
+ if(r>=100&&r>g*1.35&&r>b*1.35&&(normalizedHue<=15||normalizedHue>=345))return 'red';
  if(g>=100&&g>r*1.35&&g>b*1.35)return 'green';
  if(r>125&&b>105&&g>95&&r<225&&g<230)return 'purple';
  return 'white'

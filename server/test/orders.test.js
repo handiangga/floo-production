@@ -130,6 +130,16 @@ test('mapRows accepts soft red and green shades, including status inherited from
   assert.equal(rows[1].emptyPackage, true);
 });
 
+test('mapRows treats the brown WhatsApp order colour as a regular order', () => {
+  const brown = formattedValue => ({ formattedValue, effectiveFormat: { backgroundColor: { red: 0.47, green: 0.25, blue: 0.02 } } });
+  const row = { values: [brown('501'), brown('2 Oktober 2026'), brown('Mutia'), brown('alamat'), brown('0897'), brown('Atasan rengganis'), brown('Buttercream'), brown('MB'), brown('1')] };
+  const item = mapRows([row], 'WhatsApp', 2026)[0];
+  assert.equal(item.cancelled, false);
+  assert.equal(item.emptyPackage, false);
+  assert.equal(item.express, false);
+  assert.equal(item.shipped, false);
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
