@@ -140,6 +140,24 @@ test('mapRows treats the brown WhatsApp order colour as a regular order', () => 
   assert.equal(item.shipped, false);
 });
 
+test('mapRows recognizes both standard Shopee cancellation reds', () => {
+  const coloured = (formattedValue, backgroundColor) => ({ formattedValue, effectiveFormat: { backgroundColor } });
+  const brightRed = { values: [coloured('5191', { red: 1, green: 0, blue: 0 }), coloured('261001G923GPS1', { red: 1, green: 0, blue: 0 }), coloured('1 Oktober', { red: 1, green: 0, blue: 0 }), coloured('user', { red: 1, green: 0, blue: 0 }), coloured('Puspa', { red: 1, green: 0, blue: 0 })] };
+  const darkRed = { values: [coloured('5218', { red: 0.8, green: 0, blue: 0 }), coloured('261002JTWJPT3Q', { red: 0.8, green: 0, blue: 0 }), coloured('2 Oktober', { red: 0.8, green: 0, blue: 0 }), coloured('user', { red: 0.8, green: 0, blue: 0 }), coloured('Rok batik', { red: 0.8, green: 0, blue: 0 })] };
+  const [first, second] = mapRows([brightRed, darkRed], 'Shopee', 2026);
+  assert.equal(first.cancelled, true);
+  assert.equal(second.cancelled, true);
+});
+
+test('mapRows recognizes the deep-red TikTok cancellation palette', () => {
+  const coloured = (formattedValue, backgroundColor) => ({ formattedValue, effectiveFormat: { backgroundColor } });
+  const deepRed = { values: [coloured('2198', { red: 0.6, green: 0, blue: 0 }), coloured('586427136309233409', { red: 0.6, green: 0, blue: 0 }), coloured('7 Okt', { red: 0.6, green: 0, blue: 0 }), coloured('', { red: 0.6, green: 0, blue: 0 }), coloured('Rok Batik', { red: 0.6, green: 0, blue: 0 })] };
+  const darkerRed = { values: [coloured('2212', { red: 0.4, green: 0, blue: 0 }), coloured('586444607119525460', { red: 0.4, green: 0, blue: 0 }), coloured('7 Okt', { red: 0.4, green: 0, blue: 0 }), coloured('', { red: 0.4, green: 0, blue: 0 }), coloured('Hanum', { red: 0.4, green: 0, blue: 0 })] };
+  const [first, second] = mapRows([deepRed, darkerRed], 'TikTok', 2026);
+  assert.equal(first.cancelled, true);
+  assert.equal(second.cancelled, true);
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
