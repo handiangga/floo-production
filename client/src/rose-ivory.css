@@ -21,5 +21,65 @@
   @media(min-width:1451px) and (max-width:1750px){.stat-card{flex-direction:column;gap:10px}.stat-card p{margin-bottom:7px}.stat-card strong{font-size:30px}}
   @media(max-width:1200px){.stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dashboard-main{grid-template-columns:1fr}.deadline-panel{display:block}.deadline-list{grid-template-columns:repeat(2,minmax(0,1fr))}.charts-grid{grid-template-columns:1fr}.header-actions{width:100%}.category-summary>div:last-child{justify-content:flex-start}}
   @media(max-width:800px){.app-shell{display:block}.sidebar{position:static;width:100%;height:auto;min-height:0;padding:14px 12px;background:var(--paper);border-bottom:1px solid var(--line)}.brand{margin:0 4px 14px}.brand h1{font-size:34px;margin:0}.brand p{font-size:7px}.nav-menu button{font-size:12px;padding:10px 12px;white-space:nowrap}.nav-menu{gap:7px}.app-content{padding:20px 12px}.topbar{gap:14px;margin-bottom:18px}.page-title h2{font-size:27px}.page-title p{font-size:13px}.header-actions{gap:8px}.control{height:43px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat-card,.stat-card.pink,.stat-card.green,.stat-card.orange,.stat-card.danger,.stat-card.cancel,.stat-card.empty{min-height:123px;padding:14px;gap:9px;flex-direction:column}.stat-icon{flex-basis:34px;width:34px;height:34px;border-radius:9px}.stat-icon svg{width:21px;height:21px}.stat-card p{font-size:12px;margin-bottom:7px}.stat-card strong{font-size:27px}.stat-card small{font-size:11px}.priority-alert{font-size:12px;align-items:flex-start}.priority-alert small{font-size:10px}.overview-tools{padding:14px 12px}.quick-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;overflow:visible}.table-actions{width:100%;justify-content:stretch}.table-actions label{max-width:none;min-width:0}.deadline-list{grid-template-columns:1fr}.workload-list span{min-width:calc(50% - 4px)}.category-summary>div:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.category-summary article{min-width:0}.monitoring-page{padding:13px}.report-page{padding:14px!important}.advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.advanced-filters select,.advanced-filters input[type=date]{font-size:12px}.deadline-date-filter{flex-wrap:wrap}.channel-chart{grid-template-columns:130px 1fr}.charts-grid .panel{padding:16px}}
+  /* Keep chart segments identical to the colours shown in the legend. */
+  .donut{background:radial-gradient(var(--paper) 0 50%,transparent 51%),conic-gradient(#f05d83 0 var(--shopee),#292b31 var(--shopee) var(--tiktok),#17a968 var(--tiktok) 360deg)}
+  /* Give each field a predictable share instead of squeezing words to fit. */
+  .orders-table{table-layout:fixed;min-width:2090px;width:100%}
+  .orders-table th,.orders-table td{overflow-wrap:normal;word-break:normal;vertical-align:middle;padding:14px 12px}
+  .orders-table th:nth-child(1){width:85px}
+  .orders-table th:nth-child(2){width:120px}
+  .orders-table th:nth-child(3){width:145px}
+  .orders-table th:nth-child(4){width:220px}
+  .orders-table th:nth-child(5){width:185px}
+  .orders-table th:nth-child(6){width:150px}
+  .orders-table th:nth-child(7){width:210px}
+  .orders-table th:nth-child(8){width:160px}
+  .orders-table th:nth-child(9){width:150px}
+  .orders-table th:nth-child(10){width:65px}
+  .orders-table th:nth-child(11){width:215px}
+  .orders-table th:nth-child(12){width:150px}
+  .orders-table th:nth-child(13){width:160px}
+  .orders-table th:nth-child(14){width:110px}
+  .orders-table td:nth-child(1),.orders-table td:nth-child(2),.orders-table td:nth-child(3),.orders-table td:nth-child(4),.orders-table td:nth-child(10),.orders-table td:nth-child(14){white-space:nowrap}
+  .orders-table td:nth-child(5),.orders-table td:nth-child(7),.orders-table td:nth-child(8),.orders-table td:nth-child(9){overflow-wrap:break-word}
+  .orders-table .channel{display:inline-block;white-space:nowrap}
+  .detail-btn{display:inline-flex;white-space:nowrap;flex-wrap:nowrap;justify-content:center;min-width:85px;gap:5px;padding:9px 11px}
+  .detail-btn svg{flex-shrink:0}.check{margin-right:7px}
+  .orders-overview,.deadline-panel{min-width:0}
+  .orders-overview .orders-table-wrap{max-height:510px;overflow:auto}
+  .orders-overview .orders-table thead th{position:sticky;top:0;z-index:2}
+  .overview-tools{align-items:stretch;flex-direction:column}
+  .overview-tools .table-actions{width:100%}.overview-tools .table-actions label{max-width:none}
+  .deadline-panel{display:flex;flex-direction:column}.deadline-panel .deadline-note{margin-top:14px}
+  .print-deadline{white-space:normal;line-height:1.5}.print-deadline svg{flex-shrink:0}
+  @media(min-width:1201px){.dashboard-main{grid-template-columns:minmax(0,1fr) 310px;align-items:stretch}.deadline-panel .deadline-note{margin-top:auto;padding-top:14px}.deadline-panel .print-deadline{margin-bottom:14px}}
+  @media(max-width:800px){.orders-table th,.orders-table td{padding:12px 10px}.orders-overview .orders-table-wrap{max-height:460px}.deadline-panel{display:flex}.detail-btn{font-size:12px}.overview-tools{gap:12px}}
+  /* The full monitoring/report views share the same column sizing and scroll frame. */
+  .monitoring-page,.report-page{min-width:0;max-width:100%}
+  .monitoring-page .orders-table-shell,.report-page .orders-table-shell{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .monitoring-page .orders-table-wrap,.report-page .orders-table-wrap{max-height:65vh;overflow:auto;overscroll-behavior:contain}
+  .monitoring-page .orders-table,.report-page .orders-table{width:2225px;min-width:2225px;table-layout:fixed}
+  .monitoring-page .orders-table th,.report-page .orders-table th{position:sticky;top:0;z-index:2}
+  .monitoring-page .orders-table td,.report-page .orders-table td{padding:14px 12px;line-height:1.6;max-width:none;word-break:normal;overflow-wrap:normal}
+  .monitoring-page .orders-table td:nth-child(5),.report-page .orders-table td:nth-child(5){white-space:nowrap}
+  .monitoring-page .orders-table td:nth-child(7),.report-page .orders-table td:nth-child(7),.monitoring-page .orders-table td:nth-child(8),.report-page .orders-table td:nth-child(8),.monitoring-page .orders-table td:nth-child(9),.report-page .orders-table td:nth-child(9){white-space:normal;overflow-wrap:break-word}
+  .monitoring-page .orders-table td:last-child,.report-page .orders-table td:last-child{position:sticky;right:0;z-index:1;box-shadow:-4px 0 8px #50334208;background:var(--paper)!important}
+  .monitoring-page .orders-table th:last-child,.report-page .orders-table th:last-child{right:0;z-index:3;box-shadow:-4px 0 8px #50334208}
+  .monitoring-page .detail-btn,.report-page .detail-btn{white-space:nowrap!important;word-break:keep-all;min-width:85px;flex-shrink:0}
+  .monitoring-page .channel,.report-page .channel{white-space:nowrap!important;word-break:keep-all}
+  .monitoring-page .color-dot,.report-page .color-dot{vertical-align:middle}
+  .monitor-pagination{padding-top:18px;flex-wrap:wrap}
+  .report-page>div.mb-6{margin-top:20px}.report-page h4{padding-bottom:8px}
+  @media(max-width:800px){.monitoring-page .orders-table-wrap,.report-page .orders-table-wrap{max-height:60vh}.monitoring-page .orders-table td:last-child,.report-page .orders-table td:last-child{position:static}.monitoring-page .orders-table th:last-child,.report-page .orders-table th:last-child{right:auto}}
   @media(prefers-reduced-motion:reduce){button{transition:none}.stat-card:hover{transform:none}}
+}
+
+/* Use the printable page width instead of the desktop scrolling dimensions. */
+@media print{
+  .report-page,.report-page .orders-table-shell,.report-page .orders-table-wrap{overflow:visible!important;max-height:none!important;max-width:none!important;border:0;box-shadow:none}
+  .report-page .orders-table{width:100%!important;min-width:0!important;table-layout:auto}
+  .report-page .orders-table th,.report-page .orders-table td{position:static!important;width:auto!important;min-width:0!important;white-space:normal;overflow-wrap:anywhere;word-break:normal;font-size:7pt;padding:5px 4px;box-shadow:none!important}
+  .report-page .orders-table thead{display:table-header-group}
+  .report-page .channel{white-space:nowrap}.report-page .date-pill,.report-page .stage-pill,.report-page .status-pill,.report-page .category-pill{white-space:normal;font-size:7pt;padding:2px 3px}
+  .report-page .orders-table th:last-child,.report-page .orders-table td:last-child{display:none}
 }
