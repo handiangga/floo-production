@@ -83,11 +83,12 @@
   @media(max-width:1450px){.workload-list{grid-template-columns:repeat(4,minmax(0,1fr))}}
   @media(max-width:800px){.workload-panel{padding:16px;grid-template-columns:1fr auto;gap:14px}.workload-panel>strong{min-width:0;padding:8px 10px}.workload-panel>strong small{font-size:9px}.workload-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.workload-list>span{min-width:0;min-height:95px;padding:13px}.workload-list>span>em{font-size:24px}.workload-panel h3{font-size:15px}.workload-panel p{font-size:11px}}
   @media(max-width:420px){.workload-panel{grid-template-columns:1fr}.workload-panel>strong{justify-self:start;display:flex;align-items:center;gap:10px}.workload-panel>strong small{margin:0;font-size:11px}}
+  .orders-table tbody tr.row-express>td,
   .orders-table tbody tr.row-express:hover>td,
-  .monitoring-page .orders-table tbody tr.row-express:hover>td:last-child,
-  .report-page .orders-table tbody tr.row-express:hover>td:last-child{background:#fff0d6!important}
-  .orders-table tbody tr.row-express:hover>td:first-child{box-shadow:inset 4px 0 #c58b32}
-  .orders-table tbody tr.row-express:hover .priority-tag.express{background:#f9dca7;color:#875012}
+  .monitoring-page .orders-table tbody tr.row-express>td:last-child,
+  .report-page .orders-table tbody tr.row-express>td:last-child{background:#fff0d6!important}
+  .orders-table tbody tr.row-express>td:first-child{box-shadow:inset 4px 0 #c58b32}
+  .orders-table tbody tr.row-express .priority-tag.express{background:#f9dca7;color:#875012}
   @media(prefers-reduced-motion:reduce){button{transition:none}.stat-card:hover{transform:none}}
 }
 
