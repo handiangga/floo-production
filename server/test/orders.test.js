@@ -114,6 +114,22 @@ test('mapRows detects cancelled and empty-package statuses from row colors and r
   assert.equal(rows[1].emptyPackage, true);
 });
 
+test('mapRows accepts soft red and green shades, including status inherited from a merged area', () => {
+  const colored = (formattedValue, backgroundColor) => ({ formattedValue, effectiveFormat: { backgroundColor } });
+  const plain = formattedValue => ({ formattedValue });
+  const cancelledParent = { values: [plain(''), plain(''), plain(''), plain(''), colored('', { red: 0.88, green: 0.42, blue: 0.42 })] };
+  const cancelledProduct = { values: [plain(''), plain(''), plain(''), plain(''), plain('Rok batik'), plain('Rahayu'), plain('L'), plain('1')] };
+  const emptyParent = { values: [plain('5203'), plain('261002HMFOH2PF'), plain('2 Oktober'), plain('user'), colored('', { red: 0.38, green: 0.78, blue: 0.48 })] };
+  const emptyProduct = { values: [plain(''), plain(''), plain(''), plain(''), plain('Cempaka'), plain('Sage'), plain('XXL'), plain('1')] };
+  const merges = [
+    { startRowIndex: 0, endRowIndex: 2, startColumnIndex: 4, endColumnIndex: 6 },
+    { startRowIndex: 2, endRowIndex: 4, startColumnIndex: 4, endColumnIndex: 6 }
+  ];
+  const rows = mapRows([cancelledParent, cancelledProduct, emptyParent, emptyProduct], 'Shopee', 2026, merges);
+  assert.equal(rows[0].cancelled, true);
+  assert.equal(rows[1].emptyPackage, true);
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
