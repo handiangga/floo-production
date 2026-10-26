@@ -5,7 +5,9 @@ function dateParse(v,year){if(!v)return null;const s=String(v).trim();if(/^\d{4}
 function color(c){
  const rgb=c?.effectiveFormat?.backgroundColorStyle?.rgbColor||c?.userEnteredFormat?.backgroundColorStyle?.rgbColor||c?.effectiveFormat?.backgroundColor||c?.userEnteredFormat?.backgroundColor;
  if(!rgb)return 'white';
- const r=Math.round((rgb.red??1)*255),g=Math.round((rgb.green??1)*255),b=Math.round((rgb.blue??1)*255);
+ // Sheets omits RGB components whose value is zero.  Missing green/blue on
+ // `{ red: 1 }` means pure red, not white.
+ const r=Math.round((rgb.red??0)*255),g=Math.round((rgb.green??0)*255),b=Math.round((rgb.blue??0)*255);
  // Spreadsheet colours are manually applied and have several shades.  Compare the
  // dominant colour instead of accepting just one exact shade (for example #ff0000,
  // #cc0000 and soft red are all cancellations).

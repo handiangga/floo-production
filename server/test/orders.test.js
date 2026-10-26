@@ -158,6 +158,16 @@ test('mapRows recognizes the deep-red TikTok cancellation palette', () => {
   assert.equal(second.cancelled, true);
 });
 
+test('mapRows handles Sheets sparse RGB objects for pure red and pure green', () => {
+  const red = formattedValue => ({ formattedValue, effectiveFormat: { backgroundColor: { red: 1 } } });
+  const green = formattedValue => ({ formattedValue, effectiveFormat: { backgroundColor: { green: 1 } } });
+  const cancelled = { values: [red('5191'), red('261001G923GPS1'), red('1 Oktober'), red('user'), red('Puspa')] };
+  const emptyPackage = { values: [green('5203'), green('261002HMFOH2PF'), green('2 Oktober'), green('user'), green('Cempaka')] };
+  const [first, second] = mapRows([cancelled, emptyPackage], 'Shopee', 2026);
+  assert.equal(first.cancelled, true);
+  assert.equal(second.emptyPackage, true);
+});
+
 test('selectMonthTab prioritizes the requested year over an older or generic tab', () => {
   assert.equal(selectMonthTab(['Oktober', 'Oktober 2025', 'Oktober 2026'], 10, 2026), 'Oktober 2026');
   assert.equal(selectMonthTab(['OKT 25', 'OKT 26'], 10, 2026), 'OKT 26');
