@@ -91,6 +91,7 @@
   .orders-table tbody tr.row-express .priority-tag.express{background:#f9dca7;color:#875012}
   .order-detail{max-height:calc(100dvh - 40px);overflow-y:auto}
   .order-detail h3,.order-detail dd{overflow-wrap:anywhere}
+  .stage-detail{display:block;margin-top:6px;color:#725c67;font-size:12px;line-height:1.5;white-space:normal;overflow-wrap:anywhere}
   .clickable-order-row{cursor:pointer}
   .clickable-order-row:focus-visible{outline:2px solid var(--rose);outline-offset:-2px}
   .clickable-order-row:focus-visible>td{background:#f5e9ed!important}
@@ -99,6 +100,7 @@
 
 /* Use the printable page width instead of the desktop scrolling dimensions. */
 @media print{
+  .stage-detail{display:block;margin-top:3px;font-size:7pt;line-height:1.3;overflow-wrap:anywhere}
   .report-page,.report-page .orders-table-shell,.report-page .orders-table-wrap{overflow:visible!important;max-height:none!important;max-width:none!important;border:0;box-shadow:none}
   .report-page .orders-table{width:100%!important;min-width:0!important;table-layout:auto}
   .report-page .orders-table th,.report-page .orders-table td{position:static!important;width:auto!important;min-width:0!important;white-space:normal;overflow-wrap:anywhere;word-break:normal;font-size:7pt;padding:5px 4px;box-shadow:none!important}
