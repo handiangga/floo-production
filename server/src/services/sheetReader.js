@@ -1,10 +1,12 @@
 import { monthNames, abbrev, mapRows } from '../utils/orders.js';
 export function selectMonthTab(titles, month, year){
  const monthName=monthNames[month-1], monthAbbrev=abbrev[month-1], fullYear=String(year), shortYear=fullYear.slice(-2);
- const candidates=titles.filter(title=>{const normalized=title.toUpperCase().replace(/[^A-Z0-9]/g,'');return normalized.includes(monthName)||normalized.includes(monthAbbrev)});
- const hasRequestedYear=title=>{const normalized=title.toUpperCase().replace(/[^A-Z0-9]/g,'');return normalized.includes(fullYear)||normalized.includes(shortYear)};
- // Prefer a tab explicitly labeled with the requested year. A generic monthly tab is only a fallback.
- return candidates.find(hasRequestedYear)||candidates.find(title=>!/\d{2,4}/.test(title.replace(/[^A-Z0-9]/gi,'')))||null;
+ const normalize = title => title.toUpperCase().trim().replace(/[\s_-]+/g, '');
+ const names = [monthName, monthAbbrev];
+ const datedNames = names.flatMap(name => [name + fullYear, name + shortYear]);
+ return titles.find(title => datedNames.includes(normalize(title)))
+   || titles.find(title => names.includes(normalize(title)))
+   || null;
 }
 export async function loadSource(sheets,id,channel,month,year){
  if(!id)return {items:[],warning:`${channel}: ID spreadsheet belum diisi`};

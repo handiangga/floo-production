@@ -5,7 +5,7 @@ import { currentMonth } from '../../utils/dates';
 function getMonthOptions(selectedMonth) {
   const [year, month] = currentMonth().split('-').map(Number);
   const formatter = new Intl.DateTimeFormat('id-ID', { month: 'long', year: 'numeric', timeZone: 'UTC' });
-  const months = new Set(Array.from({ length: 24 }, (_, index) =>
+  const months = new Set(Array.from({ length: 3 }, (_, index) =>
     new Date(Date.UTC(year, month - 1 - index, 1)).toISOString().slice(0, 7)
   ));
   months.add(selectedMonth);
