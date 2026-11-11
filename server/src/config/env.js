@@ -17,6 +17,7 @@ export const env = {
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+  sheetsServiceAccount: process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
   allowedEmails: list(process.env.ALLOWED_EMAILS).map(email => email.toLowerCase()),
   sheetIds: {
     Shopee: process.env.SHOPEE_SHEET_ID,
