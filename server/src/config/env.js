@@ -19,6 +19,8 @@ export const env = {
   refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
   sheetsServiceAccount: process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
   allowedEmails: list(process.env.ALLOWED_EMAILS).map(email => email.toLowerCase()),
+  accessApproverEmail: process.env.ACCESS_APPROVER_EMAIL?.trim().toLowerCase(),
+  accessRequestsFile: process.env.ACCESS_REQUESTS_FILE?.trim(),
   sheetIds: {
     Shopee: process.env.SHOPEE_SHEET_ID,
     TikTok: process.env.TIKTOK_SHEET_ID,

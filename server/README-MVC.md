@@ -12,6 +12,10 @@ Frontend React dipertahankan dari paket v1.2. Backend dipisah menjadi routes, co
 7. Buka `http://localhost:5173`, login, cek `/api/orders?month=2026-10` setelah login. Jika ada peringatan, periksa nama tab, izin spreadsheet, dan env.
 
 ## Struktur
+
+Untuk mengaktifkan **Permintaan Akses**, pertahankan kedua akun lama di `ALLOWED_EMAILS` dan atur `ACCESS_APPROVER_EMAIL=handiangga19@gmail.com`. Atur juga `ACCESS_REQUESTS_FILE` ke path absolut pada penyimpanan yang tetap tersedia setelah restart atau deploy (contoh Linux: `/var/lib/floo/access-requests.json`). Proses backend perlu hak baca dan tulis di lokasi itu. Jalankan satu proses backend untuk file ini agar perubahan dari beberapa proses tidak saling menimpa.
+
+Akun Gmail atau Google Workspace baru mengajukan permintaan dengan tombol Google di halaman login. Akun pemberi persetujuan membuka **Permintaan Akses** di sidebar dan memilih **Setujui** atau **Tolak**. Pengguna masuk kembali dengan akun Google yang sama setelah disetujui.
 - `server/index.js`: entrypoint
 - `server/src/app.js`: Express middleware dan routes
 - `server/src/routes`: endpoint
